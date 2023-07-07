@@ -1,0 +1,24 @@
+
+        $request->validate([
+            'product_name' => 'required|unique:products',
+            'precio' => 'required',
+            'quantity' => 'required',
+            'product_category_id' => 'required',
+            //'product_category_name' => 'required',
+
+        ]);
+
+        $category_id = $request->product_category_id;
+
+        //$category_name = Category::where('id', $category_id)->value('category_name');
+
+
+        Product::insert([
+            'product_name' =>  $request->product_name,
+            'precio' => $request->precio,
+            'quantity' => $request->quantity,
+            'product_category_id' => $request->product_category_id,
+            //'product_category_name' => $category_name,
+        ]);
+
+        return redirect()->route('allproducts')->with('message', 'Producto Agregado con Exito');
